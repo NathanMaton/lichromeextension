@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LinkedIn Job Connection Checker</title>
+  <title>LinkedIn Connection Checker</title>
+  <style>
+    body { width: 300px; padding: 10px; font-family: Arial, sans-serif; }
+    #status { margin-top: 10px; }
+    #connections { margin-top: 10px; }
+  </style>
 </head>
 <body>
-  <h1>Connections at Company</h1>
-  <div id="connections-list"></div>
+  <h2>LinkedIn Connection Checker</h2>
+  <p>Click the button to check for connections at the company in this job posting.</p>
+  <button id="checkButton">Check Connections</button>
+  <div id="status"></div>
+  <div id="connections"></div>
   <script src="popup.js"></script>
 </body>
 </html>

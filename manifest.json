@@ -1,30 +1,31 @@
 {
   "manifest_version": 3,
-  "name": "LinkedIn Job Connection Checker",
+  "name": "LinkedIn Connection Checker",
   "version": "1.0",
-  "description": "Checks for LinkedIn connections at companies when viewing job postings",
+  "description": "Checks if you have LinkedIn connections at the company you're applying to",
   "permissions": [
     "activeTab",
     "storage",
-    "identity"
+    "scripting"
   ],
   "host_permissions": [
-    "https://www.linkedin.com/*",
-    "https://api.linkedin.com/*"
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": [
-        "https://www.linkedin.com/*",
-        "https://boards.greenhouse.io/*"
-      ],
-      "js": ["content.js"]
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
     }
   ],
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "web_accessible_resources": [{
+    "resources": ["myconnections.csv"],
+    "matches": ["<all_urls>"]
+  }]
 }

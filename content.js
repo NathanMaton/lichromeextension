@@ -1,3 +1,5 @@
+console.log("Content script loaded");
+
 function checkForJobPosting() {
   console.log("Checking for job posting...");
   
@@ -11,30 +13,27 @@ function checkForJobPosting() {
     companyElement = document.querySelector('span.company-name');
   }
   
-  console.log("Job Title Element:", jobTitleElement);
-  console.log("Company Element:", companyElement);
-
   if (jobTitleElement && companyElement) {
     const jobTitle = jobTitleElement.textContent.trim();
-    const companyName = companyElement.textContent.trim();
-    console.log("Job Title:", jobTitle);
-    console.log("Company Name:", companyName);
+    let companyName = companyElement.textContent.trim();
+    // Remove "at " prefix if present
+    companyName = companyName.replace(/^at\s+/i, '');
+    console.log("Detected Job Title:", jobTitle);
+    console.log("Detected Company Name:", companyName);
     return { isJobPosting: true, company: companyName, jobTitle: jobTitle };
   }
   console.log("No job posting detected");
   return { isJobPosting: false };
 }
 
-// Listen for messages from the popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  console.log("Received message:", request);
+  console.log("Content script received message:", request);
   if (request.action === 'getCompany') {
     const result = checkForJobPosting();
     console.log("Sending response:", result);
     sendResponse(result);
   }
+  return true; // Keep the message channel open for asynchronous response
 });
 
-// Run the check when the page loads
-console.log("Content script loaded");
-checkForJobPosting();
+console.log("Content script setup complete");
