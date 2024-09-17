@@ -1,4 +1,4 @@
-const CLIENT_ID = '772hjnx7xtcvqf';
+const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID;
 const REDIRECT_URI = `https://${chrome.runtime.id}.chromiumapp.org/`;
 const SCOPES = 'r_liteprofile r_emailaddress r_network';
 
@@ -34,7 +34,7 @@ function exchangeCodeForToken(code) {
     code: code,
     redirect_uri: REDIRECT_URI,
     client_id: CLIENT_ID,
-    client_secret: 'QX5V9phfwLz5Ac1x' // Be very cautious with storing this in the extension
+    client_secret: process.env.LINKEDIN_CLIENT_SECRET
   };
 
   return fetch(tokenUrl, {
