@@ -40,7 +40,7 @@ describe('Job Posting Detection and Connection Checking Integration Test', () =>
   });
 
   test('detects Anthropic job posting on Greenhouse.io', async () => {
-    await page.goto('https://boards.greenhouse.io/anthropic/jobs/4019740008', { waitUntil: 'networkidle0' });
+    await page.goto('https://boards.greenhouse.io/anthropic/jobs/4104496008', { waitUntil: 'networkidle0' });
     
     const result = await page.evaluate(() => checkForJobPosting());
     console.log('checkForJobPosting result:', result);
